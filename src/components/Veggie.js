@@ -1,9 +1,9 @@
 import React from 'react' ;
 
-function Popular() {
+function Veggie() {
     return (
-        <div>Popular</div>
+        <div>Veggie</div>
     )
 }
 
-export default Popular ;
+export default Veggie ;
