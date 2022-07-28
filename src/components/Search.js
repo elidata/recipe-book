@@ -6,7 +6,7 @@ function Search() {
     const [input,setInput] = useState("") ;
 
     const submitHandler = (e) => {
-        e.preventDefaulkt() ;
+        e.preventDefault() ;
 
     } ;
 

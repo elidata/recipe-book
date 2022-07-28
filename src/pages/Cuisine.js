@@ -19,7 +19,7 @@ function Cuisine() {
      useEffect(() => {
         getCuisine(params.type) ;
         console.log(params.type);
-     }, []) ;
+     }, [params.type]) ;
 
      return (
        <Grid> {
@@ -35,6 +35,7 @@ function Cuisine() {
         }
         </Grid>
         )
+      }
 
      const Grid = styled.div`
      display: grid ;
@@ -54,6 +55,5 @@ function Cuisine() {
         text-align: center ;
      }`
 
-}
 
 export default Cuisine ;
