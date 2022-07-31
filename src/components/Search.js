@@ -37,7 +37,7 @@ div {
 input {
     border: none ;
     font-size: 1.5rem ;
-    background-color: black;
+    background: linear-gradient(35deg, #494949, #313131);
     color:  white ;
     padding: 1rem 3rem ;
     border: none ;
