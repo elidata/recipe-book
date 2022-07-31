@@ -23,7 +23,7 @@ function Searched () {
     useEffect(() => {
         console.log(params) ;
         getSearched(params.search);
-    }, [params.search]) ;
+    }, [params.name]) ;
 
     return (
     <Grid>
