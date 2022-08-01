@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-[Demo](https://3000-4f7ed106-6eec-4c0d-b4ec-874d753c4b97.cs-europe-west4-fycr.cloudshell.dev/?authuser=0&redirectedPreviously=true)
+[Demo](https://3000-4f7ed106-6eec-4c0d-b4ec-874d753c4b97.cs-europe-west4-fycr.cloudshell.dev/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
