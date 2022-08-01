@@ -10,24 +10,24 @@ function Recipe () {
     const [activeTab, setActiveTab] = useState("instructions" ) ;
 
    
-    useEffect(() => {
-
-        const fetchDetails = async() => {
+        const fetchDetails = async(name) => {
         const data = await fetch(
-            `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+            `https://api.spoonacular.com/recipes/${name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
             ) ;  
         const detailData = await data.json() ;
         console.log(data) ;
         setDetails(detailData) ;
         } ;
 
-        fetchDetails() ;
+    useEffect(() => {
 
-    }, [params.name]);
+        fetchDetails(params.name) ;
+
+    }, [params]);
 
     return (
         <div>    
-        <h2>{details.title}</h2>
+        <h2>{details.title+"(score:"+details.spoonacularScore||"0.0"+")"}</h2>
         <DetailWrapper>
 
         <img src={details.image} alt={details.title}/>
@@ -36,9 +36,8 @@ function Recipe () {
             <Button className={activeTab==='instructions'? 'active': ''} onClick={()=>setActiveTab("instructions")}>Instructions</Button>
             <Button className={activeTab==='more'? 'active': ''} onClick={()=>setActiveTab("more")}>more...</Button>
             <div>
-                {activeTab==='ingredients' && <ul> {details.extendedIngredients.map((item) => <li key={item.name}>{item.amount+" "+item.name}</li>)} </ul>}
-                {activeTab==='instructions' && <h3> {details.instructions}</h3>}
-                {activeTab==='more' && <h3> {details.summary} </h3>}
+                {activeTab==='ingredients' && <ul> {details.extendedIngredients.map((item) => <li key={item.name}>{item.amount+" "+item.unit+" "+item.name}</li>)} </ul>}
+                <h3 dangerouslySetInnerHTML={(activeTab ==='instructions')? {__html: details.instructions} : ((activeTab==='more') ? {__html: details.summary} : {__html:"<p/>"} )}></h3>
             </div>
         </Info>
         </DetailWrapper></div>);
@@ -62,6 +61,7 @@ const DetailWrapper = styled.div`
     }
     ul{
         margin-top: 2rem ;
+        list-style-type: none; 
     }`;
 
     const Button = styled.button`
