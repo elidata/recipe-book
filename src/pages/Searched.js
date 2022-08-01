@@ -23,7 +23,7 @@ function Searched () {
     useEffect(() => {
         console.log(params) ;
         getSearched(params.search);
-    }, [params.name]) ;
+    }, [params]) ;
 
     return (
     <Grid>
@@ -44,7 +44,7 @@ function Searched () {
 const Grid = styled.div`
      display: grid ;
      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)) ;
-     grid-grap: 3rem ;
+     grid-row-gap: 3rem ;
      `;
 
 const Card = styled.div`
