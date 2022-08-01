@@ -1,26 +1,31 @@
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import styled from 'styled-components' ;
 import { useParams  } from "react-router-dom";
-import React from "react";
+//import React from "react";
 
 function Recipe () {
     
     let params = useParams() ;
-    const [details, setDetails] = useState() ;
+    const [details, setDetails] = useState({}) ;
     const [activeTab, setActiveTab] = useState("instructions" ) ;
 
-    const fetchDetails = async(id) => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)  
-        const detailData = await data.json() ;
-        setDetails(detailData) ; 
-        console.log(detailData) ; 
-    } ;
-
+   
     useEffect(() => {
-        fetchDetails(params.id) ;
-    }, [params.id])
 
-    return [
+        const fetchDetails = async() => {
+        const data = await fetch(
+            `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+            ) ;  
+        const detailData = await data.json() ;
+        console.log(data) ;
+        setDetails(detailData) ;
+        } ;
+
+        fetchDetails() ;
+
+    }, [params.name]);
+
+    return (
         <div>    
         <h2>{details.title}</h2>
         <DetailWrapper>
@@ -29,12 +34,14 @@ function Recipe () {
         <Info>
             <Button className={activeTab==='ingredients'? 'active' : ''} onClick={()=>setActiveTab("ingredients")}>Ingredients</Button>
             <Button className={activeTab==='instructions'? 'active': ''} onClick={()=>setActiveTab("instructions")}>Instructions</Button>
+            <Button className={activeTab==='more'? 'active': ''} onClick={()=>setActiveTab("more")}>more...</Button>
             <div>
-                <h3 dangerouslySetInnerHTML={{__html: details.summary}}></h3>
-                <h3 dangerouslySetInnerHTML={{__html: details.instructions}}></h3>
+                {activeTab==='ingredients' && <ul> {details.extendedIngredients.map((item) => <li key={item.name}>{item.amount+" "+item.name}</li>)} </ul>}
+                {activeTab==='instructions' && <h3> {details.instructions}</h3>}
+                {activeTab==='more' && <h3> {details.summary} </h3>}
             </div>
         </Info>
-        </DetailWrapper></div>];
+        </DetailWrapper></div>);
 }
 
 const DetailWrapper = styled.div`
@@ -58,11 +65,11 @@ const DetailWrapper = styled.div`
     }`;
 
     const Button = styled.button`
-    padding: 1rem 2rem ;
+    padding: 1rem 1rem ;
     color: #313131 ;
     background: white ;
     border: 2px solid black ;
-    margin-right:  2rem;
+    margin-right:  1rem;
     font-weight: 600;
     .active {
         background: linear-gradient(35deg, #494949, #313131);
