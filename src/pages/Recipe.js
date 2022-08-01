@@ -27,7 +27,7 @@ function Recipe () {
 
     return (
         <div>    
-        <h2>{details.title+"(score:"+details.spoonacularScore||"0.0"+")"}</h2>
+        <h2>{details.title+"(score:"+(details.spoonacularScore ?? "NA")+")"}</h2>
         <DetailWrapper>
 
         <img src={details.image} alt={details.title}/>
