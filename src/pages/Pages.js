@@ -9,9 +9,9 @@ function Pages() {
     return (
             <Routes>
                 <Route path="/" element={<Home/>} />
-                <Route path="/cuisine/:type" element={<Cuisine/>} />
-                <Route path="/searched/:search" element={<Searched/>} />
-                <Route path="/recipe/:recipe_id" element={<Recipe/>} />
+                <Route path="/cuisine/:type" element={<Cuisine />} />
+                <Route path="/searched/:search" element={<Searched />} />
+                <Route path="/recipe/:id" element={<Recipe />} />
             </Routes>
     )
 

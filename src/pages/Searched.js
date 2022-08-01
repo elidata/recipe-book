@@ -2,7 +2,7 @@ import React from "react";
 import {useEffect, useState} from "react" ;
 import {useParams} from "react-router-dom" ;
 import styled from "styled-components" ;
-import Link from "react" ;
+import {Link} from "react-router-dom" ;
 
 
 function Searched () {   
@@ -27,13 +27,14 @@ function Searched () {
 
     return (
     <Grid>
-        {searchedRecipes.map((item) => {
+        {searchedRecipes.map((recipe) => {
             return (
-                <Card key={item.id}>
-                     <Link to={"/recipe/"+ item.id}>
-                    <img src={item.image} alt="" />
-                    <h4> {item.title}</h4>
-                    </Link>
+                <Card key={recipe.id}>
+                        <Link to={"/recipe/" + recipe.id} >
+                            <p>{recipe.title}</p>
+                            <img src={recipe.image} alt={recipe.title} />
+                            <Gradient />
+                        </Link>   
                 </Card>
             )
         })}
@@ -46,7 +47,7 @@ const Grid = styled.div`
      grid-grap: 3rem ;
      `;
 
-     const Card = styled.div`
+const Card = styled.div`
      img {
         width : 100% ;
         border-radius: 2rem ;
@@ -57,8 +58,14 @@ const Grid = styled.div`
      h4 {
         text-align: center ;
         padding:1rem;
-     }`
+     }`;
 
-    
+const Gradient = styled.div`
+    z-index: 3 ;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
+    `;
 
 export default Searched ;

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from 'styled-components' ;
 import { useParams  } from "react-router-dom";
-
 import React from "react";
 
 function Recipe () {
@@ -10,20 +9,22 @@ function Recipe () {
     const [details, setDetails] = useState() ;
     const [activeTab, setActiveTab] = useState("instructions" ) ;
 
-    const fetchDetails = async() => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipe_id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)  
+    const fetchDetails = async(id) => {
+        const data = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)  
         const detailData = await data.json() ;
         setDetails(detailData) ; 
         console.log(detailData) ; 
     } ;
 
     useEffect(() => {
-        fetchDetails() ;
-    }, [params.name])
+        fetchDetails(params.id) ;
+    }, [params.id])
 
-    return 
-        <DetailWrapper>
+    return [
+        <div>    
         <h2>{details.title}</h2>
+        <DetailWrapper>
+
         <img src={details.image} alt={details.title}/>
         <Info>
             <Button className={activeTab==='ingredients'? 'active' : ''} onClick={()=>setActiveTab("ingredients")}>Ingredients</Button>
@@ -33,7 +34,7 @@ function Recipe () {
                 <h3 dangerouslySetInnerHTML={{__html: details.instructions}}></h3>
             </div>
         </Info>
-        </DetailWrapper>
+        </DetailWrapper></div>];
 }
 
 const DetailWrapper = styled.div`
@@ -43,13 +44,14 @@ const DetailWrapper = styled.div`
     h2 {
         margin-bottom:  2rem;
     }
-    .active {
-        background: linear-gradient(35deg, #494949, #313131);
-        color: white ;
-    }
+    
     li {
         font-size: 1.2rem;
         line-height: 2.5rem;
+    }
+    img {
+        width: 50% ;
+        height: 30rem ;
     }
     ul{
         margin-top: 2rem ;
@@ -62,6 +64,10 @@ const DetailWrapper = styled.div`
     border: 2px solid black ;
     margin-right:  2rem;
     font-weight: 600;
+    .active {
+        background: linear-gradient(35deg, #494949, #313131);
+        color: white ;
+    }
     `;
 
     const Info = styled.div`
