@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-[Demo](https://3000-4f7ed106-6eec-4c0d-b4ec-874d753c4b97.cs-europe-west4-fycr.cloudshell.dev/)
+[Demo](http://elidata.github.io/recipe-book/)
 
 This project was bootstrapped with [Create React App](http://elidata.github.io/recipe-book/).
 
